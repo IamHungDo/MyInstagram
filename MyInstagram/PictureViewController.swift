@@ -9,8 +9,10 @@
 import UIKit
 
 class PictureViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+
     
     @IBOutlet weak var uploadImage: UIImageView!
+    var postImage : UIImage?
 
     
     @IBAction func onTake(_ sender: Any) {
@@ -32,6 +34,22 @@ class PictureViewController: UIViewController, UIImagePickerControllerDelegate, 
         
     }
     
+    @IBAction func onSubmit(_ sender: Any) {
+        
+        Post.postUserImage(image: postImage, withCaption: nil) { (success: Bool, error: Error?) in
+            if let error = error {
+                print(error.localizedDescription)
+            }else{
+//                self.performSegue(withIdentifier: "BackToHome", sender: nil)
+            }
+        }
+        
+        dismiss(animated: true, completion: nil)
+
+    }
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -46,7 +64,10 @@ class PictureViewController: UIViewController, UIImagePickerControllerDelegate, 
                                didFinishPickingMediaWithInfo info: [String : Any]) {
         
         let originalImage = info[UIImagePickerControllerOriginalImage] as! UIImage
+        
+        uploadImage.image = nil
         uploadImage.image = originalImage
+        self.postImage = originalImage
         
         
 //       let editedImage = info[UIImagePickerControllerEditedImage] as! UIImage

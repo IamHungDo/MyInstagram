@@ -6,6 +6,7 @@ target 'MyInstagram' do
   use_frameworks!
 
     pod 'Parse'
+    pod 'ParseUI'
 
   # Pods for MyInstagram
 

@@ -25,6 +25,18 @@ class InstagramViewController: UIViewController, UITableViewDataSource, UITableV
         query.order(byDescending: "createdAt")
         query.includeKey("author")
         query.limit = 20
+        query.findObjectsInBackground { (posts: [PFObject]?, error: Error?) in
+            if let posts = posts {
+                self.posts = posts
+                self.tableView.reloadData()
+            } else {
+                print("error")
+            }
+            
+            self.tableView.reloadData()
+
+        
+        }
         
         // Do any additional setup after loading the view.
     }
@@ -35,12 +47,19 @@ class InstagramViewController: UIViewController, UITableViewDataSource, UITableV
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 0
+        if posts != nil {
+            return posts.count
+        } else {
+            return 0
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "PhotoCell", for: indexPath)
         
+        let cell = tableView.dequeueReusableCell(withIdentifier: "PhotoCell", for: indexPath) as! PhotoCell
+        
+        cell.postObj = self.posts[indexPath.row]
+
         
         return cell
     }
