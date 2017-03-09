@@ -13,10 +13,24 @@ class InstagramViewController: UIViewController, UITableViewDataSource, UITableV
     
     var posts: [PFObject]!
     
+    @IBAction func refreshButton(_ sender: Any) {
+        let query = PFQuery(className: "Post")
+        query.order(byDescending: "createdAt")
+        query.includeKey("author")
+        query.limit = 20
+        query.findObjectsInBackground { (posts: [PFObject]?, error: Error?) in
+            if let posts = posts {
+                self.posts = posts
+                self.tableView.reloadData()
+            } else {
+                print("error")
+            }
+        }
+        
+    }
     @IBAction func logOutButton(_ sender: Any) {
         PFUser.logOut()
-        
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: Post.userDidLogoutNotification) , object: nil)
+        self.performSegue(withIdentifier: "logout", sender: nil)
 
     }
     @IBOutlet weak var tableView: UITableView!
@@ -39,9 +53,10 @@ class InstagramViewController: UIViewController, UITableViewDataSource, UITableV
                 print("error")
             }
             
-
         
         }
+        self.tableView.reloadData()
+
 
         // Do any additional setup after loading the view.
     }

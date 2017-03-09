@@ -37,21 +37,21 @@ class PictureViewController: UIViewController, UIImagePickerControllerDelegate, 
     
     @IBAction func onSubmit(_ sender: Any) {
         
+        Post.postUserImage(image: postImage, withCaption: userText.text, withCompletion: nil)
 
         
-        Post.postUserImage(image: postImage, withCaption: userText.text) { (success: Bool, error: Error?) in
-            if let error = error {
-                print(error.localizedDescription)
-            }else{
-//                self.performSegue(withIdentifier: "BackToHome", sender: nil)
-            }
-        }
-        
-        dismiss(animated: true, completion: nil)
-
+//        Post.postUserImage(image: postImage, withCaption: userText.text) { (success: Bool, error: Error?) in
+//            if let error = error {
+//                print(error.localizedDescription)
+//            }else{
+//            }
+//        }
+//        
+//        dismiss(animated: true, completion: nil)
+//
+//
+//    
     }
-    
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
