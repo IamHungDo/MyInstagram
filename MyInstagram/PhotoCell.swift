@@ -8,27 +8,25 @@
 
 import UIKit
 import Parse
-import ParseUI
 
 
 class PhotoCell: UITableViewCell {
-    
+    @IBOutlet weak var posterView: UIImageView!
     @IBOutlet weak var captionLabel: UILabel!
-    @IBOutlet var postImage: PFImageView!
     
     
-    var postObj : PFObject! {
-        
+    var img: PFObject! {
         didSet {
-            if postObj["media"] != nil {
-            self.postImage.file = postObj["media"] as? PFFile
-            self.postImage.loadInBackground()
-//            self.captionLabel.text = postObj["caption"] as! String!
-            } else {
-                
-            }
-        }
-        
+            captionLabel.text = img.object(forKey: "caption") as? String
+            
+            let imageData = img.object(forKey: "media") as? PFFile
+            imageData?.getDataInBackground(block: { (imageinfo: Data?, error: Error?) in
+                if(error == nil) {
+                    let picture = UIImage(data: imageinfo!)
+                    self.posterView.image = picture
+                }
+            })
+    }
     }
 
     

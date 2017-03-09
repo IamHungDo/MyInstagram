@@ -13,7 +13,7 @@ import Parse
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
+    var storyboard = UIStoryboard(name: "Main", bundle: nil)
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
@@ -24,6 +24,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 configuration.server = "https://powerful-shelf-43655.herokuapp.com/parse"
             })
         )
+        
+        if PFUser.current() != nil {
+            let mainView = storyboard.instantiateViewController(withIdentifier: "profileView")
+            window?.rootViewController = mainView
+                    }
         
         return true
     }

@@ -11,6 +11,7 @@ import UIKit
 class PictureViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     
+    @IBOutlet weak var userText: UITextField!
     @IBOutlet weak var uploadImage: UIImageView!
     var postImage : UIImage?
 
@@ -36,7 +37,10 @@ class PictureViewController: UIViewController, UIImagePickerControllerDelegate, 
     
     @IBAction func onSubmit(_ sender: Any) {
         
-        Post.postUserImage(image: postImage, withCaption: nil) { (success: Bool, error: Error?) in
+        let smallimg = resize(image: postImage!, newSize: CGSize(width: 200, height: 200))
+
+        
+        Post.postUserImage(image: smallimg, withCaption: userText.text) { (success: Bool, error: Error?) in
             if let error = error {
                 print(error.localizedDescription)
             }else{
@@ -67,7 +71,7 @@ class PictureViewController: UIViewController, UIImagePickerControllerDelegate, 
         
         uploadImage.image = nil
         uploadImage.image = originalImage
-        self.postImage = originalImage
+        postImage = originalImage
         
         
 //       let editedImage = info[UIImagePickerControllerEditedImage] as! UIImage
@@ -78,6 +82,21 @@ class PictureViewController: UIViewController, UIImagePickerControllerDelegate, 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func resize(image: UIImage, newSize: CGSize) -> UIImage {
+        
+        let rect = CGRect(origin: CGPoint(x: 0,y :0), size: CGSize(width: 100, height: 100))
+
+        let resizeImageView = UIImageView(frame: rect)
+        resizeImageView.contentMode = UIViewContentMode.scaleAspectFill
+        resizeImageView.image = image
+        
+        UIGraphicsBeginImageContext(resizeImageView.frame.size)
+        resizeImageView.layer.render(in: UIGraphicsGetCurrentContext()!)
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return newImage!
     }
     
     

@@ -13,6 +13,11 @@ class InstagramViewController: UIViewController, UITableViewDataSource, UITableV
     
     var posts: [PFObject]!
     
+    @IBAction func logOutButton(_ sender: Any) {
+        PFUser.logOut()
+        self.performSegue(withIdentifier: "logout", sender: nil)
+
+    }
     @IBOutlet weak var tableView: UITableView!
 
     override func viewDidLoad() {
@@ -33,11 +38,10 @@ class InstagramViewController: UIViewController, UITableViewDataSource, UITableV
                 print("error")
             }
             
-            self.tableView.reloadData()
 
         
         }
-        
+
         // Do any additional setup after loading the view.
     }
 
@@ -58,7 +62,7 @@ class InstagramViewController: UIViewController, UITableViewDataSource, UITableV
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "PhotoCell", for: indexPath) as! PhotoCell
         
-        cell.postObj = self.posts[indexPath.row]
+        cell.img = posts[indexPath.row]
 
         
         return cell

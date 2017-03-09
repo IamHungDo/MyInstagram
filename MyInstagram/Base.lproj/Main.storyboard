@@ -81,7 +81,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="photoCell" rowHeight="310" id="D7z-Qh-0zL" customClass="PhotoCell" customModule="MyInstagram" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="PhotoCell" rowHeight="310" id="D7z-Qh-0zL" customClass="PhotoCell" customModule="MyInstagram" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="310"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="D7z-Qh-0zL" id="o4R-c1-KGM">
@@ -103,7 +103,7 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="captionLabel" destination="kl0-hr-ntg" id="Muk-Qk-57h"/>
-                                            <outlet property="postImage" destination="udh-yt-az7" id="TdH-0m-eIt"/>
+                                            <outlet property="posterView" destination="udh-yt-az7" id="b1e-G0-yQw"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -112,7 +112,12 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="Instagram" id="Zc3-dp-9Tt">
-                        <barButtonItem key="leftBarButtonItem" title="Logout" id="U4n-AV-YhV"/>
+                        <barButtonItem key="leftBarButtonItem" title="Logout" id="U4n-AV-YhV">
+                            <connections>
+                                <action selector="logOutButton:" destination="1nB-mU-IgN" id="2b5-0b-mKE"/>
+                                <segue destination="BYZ-38-t0r" kind="show" identifier="logout" id="X16-iB-oud"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Capture" id="saL-l5-Ndg">
                             <connections>
                                 <segue destination="EK7-Qg-LN5" kind="show" id="Am6-He-ffd"/>
@@ -168,11 +173,19 @@
                                     <action selector="onSubmit:" destination="EK7-Qg-LN5" eventType="touchUpInside" id="fZ5-vv-UcV"/>
                                 </connections>
                             </button>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="iEa-0b-Qzt">
+                                <rect key="frame" x="0.0" y="379" width="375" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <connections>
                         <outlet property="uploadImage" destination="bQT-yf-sEE" id="b7m-Z0-f3f"/>
+                        <outlet property="userText" destination="iEa-0b-Qzt" id="CH2-QW-xgM"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cc8-Ng-vyo" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -182,7 +195,7 @@
         <!--Navigation Controller-->
         <scene sceneID="b3q-1X-IJm">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="yKr-k3-qfQ" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="profileView" automaticallyAdjustsScrollViewInsets="NO" id="yKr-k3-qfQ" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="2ZX-EI-z7Q">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
