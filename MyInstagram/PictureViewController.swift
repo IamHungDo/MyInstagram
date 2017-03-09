@@ -37,10 +37,9 @@ class PictureViewController: UIViewController, UIImagePickerControllerDelegate, 
     
     @IBAction func onSubmit(_ sender: Any) {
         
-        let smallimg = resize(image: postImage!, newSize: CGSize(width: 200, height: 200))
 
         
-        Post.postUserImage(image: smallimg, withCaption: userText.text) { (success: Bool, error: Error?) in
+        Post.postUserImage(image: postImage, withCaption: userText.text) { (success: Bool, error: Error?) in
             if let error = error {
                 print(error.localizedDescription)
             }else{

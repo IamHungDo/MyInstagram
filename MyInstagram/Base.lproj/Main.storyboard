@@ -115,7 +115,6 @@
                         <barButtonItem key="leftBarButtonItem" title="Logout" id="U4n-AV-YhV">
                             <connections>
                                 <action selector="logOutButton:" destination="1nB-mU-IgN" id="2b5-0b-mKE"/>
-                                <segue destination="BYZ-38-t0r" kind="show" identifier="logout" id="X16-iB-oud"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Capture" id="saL-l5-Ndg">
