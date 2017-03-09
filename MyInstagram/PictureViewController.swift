@@ -11,6 +11,7 @@ import UIKit
 class PictureViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     
+    @IBOutlet var backgroundView: UIView!
     @IBOutlet weak var userText: UITextField!
     @IBOutlet weak var uploadImage: UIImageView!
     var postImage : UIImage?
@@ -56,8 +57,8 @@ class PictureViewController: UIViewController, UIImagePickerControllerDelegate, 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
-        
+    self.backgroundView.backgroundColor = UIColor(patternImage: UIImage(named: "instaback")!)
+        navigationController?.navigationBar.barTintColor = UIColor.white
 
         // Do any additional setup after loading the view.
     }

@@ -12,6 +12,8 @@ import Parse
 class InstagramViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     var posts: [PFObject]!
+    static let userDidLogoutNotification = "UserDidLogout"
+
     
     @IBAction func refreshButton(_ sender: Any) {
         let query = PFQuery(className: "Post")
@@ -30,7 +32,7 @@ class InstagramViewController: UIViewController, UITableViewDataSource, UITableV
     }
     @IBAction func logOutButton(_ sender: Any) {
         PFUser.logOut()
-        self.performSegue(withIdentifier: "logout", sender: nil)
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: Post.userDidLogoutNotification) , object: nil)
 
     }
     @IBOutlet weak var tableView: UITableView!

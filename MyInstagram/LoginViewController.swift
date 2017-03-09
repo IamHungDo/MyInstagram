@@ -11,6 +11,7 @@ import Parse
 
 class LoginViewController: UIViewController {
     
+    @IBOutlet var backgroundView: UIView!
     @IBOutlet weak var userNameField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
     
@@ -45,6 +46,7 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.backgroundView.backgroundColor = UIColor(patternImage: UIImage(named: "instaback")!)
 
         // Do any additional setup after loading the view.
     }

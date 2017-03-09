@@ -11,6 +11,8 @@ import Parse
 
 class Post: NSObject {
     
+    static let userDidLogoutNotification = "UserDidLogout"
+
     
     class func postUserImage(image: UIImage?, withCaption caption: String?, withCompletion completion: PFBooleanResultBlock?) {
         // Create Parse object PFObject
